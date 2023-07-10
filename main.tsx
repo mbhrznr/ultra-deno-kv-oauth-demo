@@ -53,7 +53,4 @@ server
     return await signOut(request(ctx));
   });
 
-if (import.meta.main) {
-  Deno.serve(server.fetch);
-}
-export default server;
+Deno.serve(server.fetch);
