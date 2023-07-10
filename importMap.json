@@ -1,10 +1,9 @@
 {
   "imports": {
-    "react": "https://esm.sh/react@18.2.0?dev",
+    "react": "https://esm.sh/react@18.2.0",
     "react/": "https://esm.sh/react@18.2.0/",
     "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/server": "https://esm.sh/react-dom@18.2.0/server?dev",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?dev",
+    "react-dom/server": "https://esm.sh/react-dom@18.2.0/server",
 
     "kv_oauth": "https://deno.land/x/deno_kv_oauth@v0.2.7/mod.ts",
     "std/": "https://deno.land/std@0.193.0/",

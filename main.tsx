@@ -1,4 +1,4 @@
-import { type Context, createServer } from "ultra/server.ts";
+import { createServer } from "ultra/server.ts";
 import { loadSync } from "std/dotenv/mod.ts";
 import {
   createGitHubOAuth2Client,
@@ -15,21 +15,15 @@ loadSync({ export: true });
 
 const oauth2Client = createGitHubOAuth2Client();
 
-function request(ctx: Context) {
-  return new Request(ctx.req.url, {
-    body: ctx.req.body,
-    headers: ctx.req.headers,
-    method: ctx.req.method,
-  });
-}
-
 const server = await createServer({
   importMapPath: import.meta.resolve("./importMap.json"),
 });
 
+console.log(Deno.version)
+
 server
   .get("/", async (ctx) => {
-    const sessionId = await getSessionId(request(ctx));
+    const sessionId = await getSessionId(ctx.req.raw);
     const isSignedIn = sessionId != null;
     const accessToken = isSignedIn
       ? await getSessionAccessToken(oauth2Client, sessionId)
@@ -43,14 +37,14 @@ server
     });
   })
   .get("/signin", async (ctx) => {
-    return await signIn(request(ctx), oauth2Client);
+    return await signIn(ctx.req.raw, oauth2Client);
   })
   .get("/callback", async (ctx) => {
-    const { response } = await handleCallback(request(ctx), oauth2Client);
+    const { response } = await handleCallback(ctx.req.raw, oauth2Client);
     return response;
   })
   .get("/signout", async (ctx) => {
-    return await signOut(request(ctx));
+    return await signOut(ctx.req.raw);
   });
 
 Deno.serve(server.fetch);
