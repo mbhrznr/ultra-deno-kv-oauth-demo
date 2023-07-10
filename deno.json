@@ -8,6 +8,6 @@
   "lint": {},
   "importMap": "./importMap.json",
   "tasks": {
-    "start": "deno run -A --unstable --watch ./server.tsx"
+    "start": "deno run -A --unstable --watch ./main.tsx"
   }
 }
