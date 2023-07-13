@@ -9,7 +9,7 @@ import {
   signOut,
 } from "kv_oauth";
 
-import App from "./app.tsx";
+import App from "./src/app.tsx";
 
 loadSync({ export: true });
 
@@ -19,7 +19,11 @@ const server = await createServer({
   importMapPath: import.meta.resolve("./importMap.json"),
 });
 
-console.log(Deno.version)
+function ServerApp({ accessToken, isSignedIn }: {
+  accessToken: string | null;
+  isSignedIn: boolean}) {
+    return <App {...{ accessToken, isSignedIn }} />;
+}
 
 server
   .get("/", async (ctx) => {
@@ -29,7 +33,7 @@ server
       ? await getSessionAccessToken(oauth2Client, sessionId)
       : null;
     const result = await server.render(
-      <App {...{ accessToken, isSignedIn }} />,
+      <ServerApp {...{ accessToken, isSignedIn }} />,
     );
 
     return ctx.body(result, 200, {
