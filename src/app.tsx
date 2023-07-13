@@ -17,8 +17,16 @@ export default function App(
       <body>
         <main>
           <p>Provider: GitHub</p>
-          <p>Signed in: {isSignedIn}</p>
-          <p>Your access token: {accessToken}</p>
+          <p>Signed in: {String(isSignedIn)}</p>
+          <p>
+            Your access token: {accessToken
+              ? (
+                <span style={{ filter: "blur(3px)" }}>
+                  {accessToken} (intentionally blurred)
+                </span>
+              )
+              : null}
+          </p>
           <p>
             <a href="/signin">Sign in</a>
           </p>

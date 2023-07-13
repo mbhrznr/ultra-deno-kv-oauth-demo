@@ -9,8 +9,8 @@ https://ultrajs.dev/
 
 Make sure to install Deno: https://deno.land/manual/getting_started/installation
 
-Then start the project in dev mode:
-This will watch the project directory and restart as necessary.
+Then start the project in dev mode: This will watch the project directory and
+restart as necessary.
 
 ```
 deno task dev

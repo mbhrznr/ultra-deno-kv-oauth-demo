@@ -21,8 +21,9 @@ const server = await createServer({
 
 function ServerApp({ accessToken, isSignedIn }: {
   accessToken: string | null;
-  isSignedIn: boolean}) {
-    return <App {...{ accessToken, isSignedIn }} />;
+  isSignedIn: boolean;
+}) {
+  return <App {...{ accessToken, isSignedIn }} />;
 }
 
 server
